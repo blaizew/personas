@@ -16,7 +16,7 @@ A systematic process for building an AI coaching persona from a public figure's 
 - `source-enumeration.md`, `curriculum-links.md`, etc. -- Source discovery artifacts.
 - `sources.md` -- Metadata catalog of sources (titles, dates, URLs, transcript method).
 
-Raw source files (transcripts, essays, etc.) are stored in the top-level `sources/[persona-name]/` directory, which is gitignored. Source material is often copyrighted and must not be committed to public repositories. **Never store sources inside the persona folder itself** (e.g., `[persona-name]/sources/`) — always use the centralized `sources/[persona-name]/` directory so there is one gitignore to trust.
+Raw source files (transcripts, essays, etc.) are stored in `working-files/[persona-name]/sources/`, which is gitignored. Source material is often copyrighted and must not be committed to public repositories. During the build, sources may live in a `sources/[persona-name]/` directory or `[persona-name]/sources/` — Phase 8 cleanup moves everything to `working-files/`.
 
 **Rule: Only `CLAUDE.md`, `modules/`, and persona-specific reference files get committed.** Everything else is build scaffolding — keep it locally for iteration but never push it.
 
@@ -663,6 +663,41 @@ The modular architecture makes iteration efficient -- you don't need to rebuild 
 
 ---
 
+## Phase 8: Cleanup & Commit
+
+After testing is complete, clean the persona folder so only runtime files remain:
+
+1. **Move build artifacts to `working-files/`:**
+   ```
+   mkdir -p working-files/[persona-name]
+   mv [persona-name]/synthesis/ working-files/[persona-name]/
+   mv [persona-name]/build-progress.md working-files/[persona-name]/
+   mv [persona-name]/sources.md working-files/[persona-name]/
+   mv [persona-name]/source-enumeration.md working-files/[persona-name]/  # if exists
+   mv [persona-name]/curriculum-links.md working-files/[persona-name]/    # if exists
+   ```
+
+2. **Move sources if they're in the persona folder:**
+   ```
+   mv [persona-name]/sources/ working-files/[persona-name]/sources/  # if exists
+   ```
+
+3. **Verify the persona folder is clean** -- should contain only:
+   - `CLAUDE.md`
+   - `modules/` directory
+   - Any persona-specific supporting files referenced by CLAUDE.md (e.g., `external-links-appendix.md`)
+
+4. **Commit and push:**
+   ```
+   git add [persona-name]/ .gitignore
+   git commit -m "Add [persona-name] persona"
+   git push
+   ```
+
+The `working-files/` directory is gitignored. Build artifacts are preserved locally for iteration but never pushed to GitHub.
+
+---
+
 ## Architecture Notes
 
 ### Parallelize Divergent Work, Keep Convergent Work Single-Threaded
@@ -705,6 +740,7 @@ Batch parallel agents in groups of 5-8. In practice, 8 simultaneous Opus agents 
 
 ## Directory Structure
 
+### Committed (runtime files)
 ```
 [persona-name]/
   CLAUDE.md                    <- Persona prompt (character-first + routing table)
@@ -712,17 +748,26 @@ Batch parallel agents in groups of 5-8. In practice, 8 simultaneous Opus agents 
     01-[situation].md          <- Situational module (3-6K tokens each)
     02-[situation].md
     ...
+  [optional supporting files]  <- e.g., external-links-appendix.md
+```
+
+### Local only (gitignored build artifacts)
+```
+working-files/[persona-name]/
+  sources/                     <- Raw source material (transcripts, essays, etc.)
   synthesis/
     taxonomy-guide.md          <- Module design + frequency analysis
     extractions/               <- Phase 3 per-source extraction files
       [source-name]-extraction.md
+  build-progress.md            <- Pipeline status and agent audit log
+  sources.md                   <- Source metadata catalog
+  [other build artifacts]      <- source-enumeration.md, curriculum-links.md, etc.
 ```
-
-Raw sources live in the top-level `sources/[persona-name]/` directory (gitignored), NOT inside the persona folder.
 
 Notes:
 - No separate `quotes.md` -- quotes live inline in modules.
 - No separate index file -- the routing table in CLAUDE.md is the index.
+- All build artifacts go to `working-files/` (gitignored), not in the persona folder.
 
 ---
 
@@ -815,4 +860,6 @@ This catches model substitution (like the Codex incident) and ensures full trace
 - [ ] Run Phase 6 CLAUDE.md construction (single agent)
 - [ ] Test persona with real coaching scenarios (Phase 7)
 - [ ] Iterate based on testing
-- [ ] Commit to git
+- [ ] Move build artifacts to `working-files/[persona-name]/` (Phase 8)
+- [ ] Verify persona folder contains only CLAUDE.md + modules/ + supporting files
+- [ ] Commit and push to git
