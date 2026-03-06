@@ -85,9 +85,8 @@ Raw source files (transcripts, essays) are stored in the top-level `sources/` di
 
 | Document | Purpose |
 |----------|---------|
-| [BUILD-PERSONA.md](BUILD-PERSONA.md) | Full pipeline guide with reusable prompt templates for every phase |
+| [BUILD-PERSONA.md](BUILD-PERSONA.md) | Full pipeline guide with reusable prompt templates for every phase (updated after each build) |
 | [coaching-persona-anatomy.md](coaching-persona-anatomy.md) | The 11 elements that make coaching personas effective, ranked by leverage |
-| [pipeline-learnings.md](pipeline-learnings.md) | Improvement tracking across persona builds |
 
 ## What Makes This Different
 

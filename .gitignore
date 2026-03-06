@@ -1,3 +1,10 @@
 .DS_Store
 temp/
 sources/
+
+# Build artifacts — intermediate pipeline output, not needed at runtime
+**/synthesis/
+**/build-progress.md
+**/source-enumeration.md
+**/curriculum-links.md
+**/sources.md

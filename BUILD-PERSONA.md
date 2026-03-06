@@ -5,18 +5,26 @@ A systematic process for building an AI coaching persona from a public figure's 
 ## Overview
 
 **Input:** A public figure's name and domain
-**Output:** A persona directory containing:
+**Output:** A persona directory containing only what's needed to run the persona:
 - `CLAUDE.md` -- Character-first behavioral blueprint + situational module routing table (the system prompt)
-- `sources.md` -- Metadata catalog of all sources (titles, dates, URLs, transcript method). No copyrighted content — just references.
-- 15-25 situational modules -- Deep knowledge base organized by conversational context (3-6K tokens each)
-- `synthesis/taxonomy-guide.md` -- Module design + frequency analysis
-- `synthesis/extractions/` -- Per-source structured extractions
+- `modules/` -- 15-25 situational modules organized by conversational context (3-6K tokens each)
+- Any persona-specific reference files (e.g., `external-links-appendix.md` if the persona recommends external resources)
+
+**Build artifacts (gitignored, not committed):**
+- `synthesis/` -- Taxonomy guide, extractions, scratch files. Intermediate pipeline output consumed during module synthesis. Useful for rebuilding/iterating but not needed at runtime.
+- `build-progress.md` -- Source catalog, acquisition roadmap, pipeline status. Contains URLs and scraping metadata that shouldn't be published.
+- `source-enumeration.md`, `curriculum-links.md`, etc. -- Source discovery artifacts.
+- `sources.md` -- Metadata catalog of sources (titles, dates, URLs, transcript method).
 
 Raw source files (transcripts, essays, etc.) are stored in the top-level `sources/[persona-name]/` directory, which is gitignored. Source material is often copyrighted and must not be committed to public repositories. **Never store sources inside the persona folder itself** (e.g., `[persona-name]/sources/`) — always use the centralized `sources/[persona-name]/` directory so there is one gitignore to trust.
+
+**Rule: Only `CLAUDE.md`, `modules/`, and persona-specific reference files get committed.** Everything else is build scaffolding — keep it locally for iteration but never push it.
 
 **Cost:** Typically $1-5 in transcription (AssemblyAI at $0.01/min) + LLM API costs for synthesis agents. Most transcripts can be found free online.
 
 **Timeline:** ~60-90 minutes wall-clock on Claude Code Max (Phases 1-2 are human-paced source collection; Phases 3-7 are ~20-30 minutes of agent work).
+
+**Continuous execution:** Once a persona build is started, run straight through all phases without pausing to check in with the user between phases. Each phase's completion should immediately trigger the next phase. Only stop if a phase fails in a way that requires user input (e.g., budget approval for transcription). Update build-progress.md after each phase completes, but do not wait for user acknowledgment before proceeding.
 
 ---
 
@@ -50,15 +58,24 @@ Different domains have different canonical interviewers. Build the list based on
 Search pattern: `"[Person Name] interview"`, `"[Person Name] full interview"`, `"[Person Name] keynote"`, `"[Person Name] [interviewer name]"`
 
 ### Step 3: Search for rare/lesser-known appearances
-After the obvious sources, cast a wider net:
-- **X/Twitter search** (via Grok): `"[Person Name] rare interview OR full interview OR podcast OR keynote speech"` -- fans often surface obscure content
-- **YouTube search:** `"[Person Name] full"` sorted by duration (long videos = full interviews)
-- **University archives:** Commencement speeches, guest lectures, honorary degree ceremonies
-- **Conference archives:** TED, re:Invent, Milken, Davos, Allen & Co Sun Valley
-- **Government archives:** Congressional testimony (congress.gov), regulatory hearings
-- **Podcast search:** Listen Notes, Podscripts.co
-- **Internet Archive:** Often has full broadcast recordings that have been scrubbed elsewhere
-- **Show-specific archives:** charlierose.com, americanrhetoric.com, c-span.org
+After the obvious sources, cast a wider net. **Use this platform checklist for every persona:**
+
+| Platform | What to search | Notes |
+|---|---|---|
+| YouTube | `"[Person Name] full"` sorted by duration | Long videos = full interviews |
+| Apple Podcasts / Listen Notes | `"[Person Name]"` | Reliable audio URLs via `yt-dlp` |
+| X/Twitter (via Grok) | `"[Person Name] rare interview OR full interview OR podcast"` | Fans surface obscure content |
+| University archives | `"[Person Name] commencement OR lecture"` site:*.edu | Speeches + guest lectures |
+| Conference archives | TED, re:Invent, Milken, Davos, Allen & Co Sun Valley | Search each relevant to the domain |
+| Government archives | congress.gov, C-SPAN | Testimony, hearings, formal statements |
+| Podcast transcript sites | podscripts.co, rev.com/blog, happyscribe | Free transcripts before paying |
+| Internet Archive | archive.org search | Full broadcasts scrubbed elsewhere |
+| Show-specific archives | charlierose.com, americanrhetoric.com, c-span.org | High-quality human-generated transcripts |
+| Substack / newsletters | `"[Person Name]"` site:substack.com | Text Q&As, guest posts, profiles |
+
+Additional sources to check:
+- **Company/personal blogs** — paulgraham.com, aboutamazon.com, etc.
+- **Shareholder letters** — Quartr, SEC filings, company investor pages
 
 ### Step 4: Prioritize sources
 Rank by signal quality:
@@ -104,6 +121,16 @@ Follow this search order for each source:
 
 **Rank sources by quality, not cost.** When prioritizing which sources to acquire, rank by probable signal quality (depth of interview, interviewer quality, topic coverage, candor) -- NOT by whether the transcript/audio is free. We want the highest quality sources first. Cost (transcription fees, paywalls) is a secondary concern. A $0.70 transcription of a foundational 71-minute interview is always worth more than a free but thin 5-minute clip.
 
+**Use Playwright for essay/article acquisition, not WebFetch.** WebFetch returns summaries instead of full text ~25% of the time for essays and long-form written content. Playwright DOM extraction is slower but reliable. Use WebFetch only for checking if a page exists or fetching short metadata.
+
+**Batch essay acquisition at 10-15 per agent.** Larger batches (25+) risk timeouts and require refetch agents. Network-bound acquisition has higher variance than LLM-bound processing. Maximum 15 essays per acquisition agent.
+
+**Verify free transcripts by word count.** Real interview transcripts are >5K words. Timestamped highlights or summaries are <2K. Visit the URL and verify content before flagging as "free transcript found." (Lesson: EconTalk's "free transcript" was actually just timestamped highlights.)
+
+**Disambiguate common names in Phase 1.** Before adding any source to the catalog, verify the first ~100 words confirm it's the correct person. Common names (Paul Graham, John Smith, etc.) can lead to wrong-person sources.
+
+**QA sampling after first acquisition batch.** After the first batch of essays/transcripts is acquired, sample 2-3 random sources and verify completeness (expected word count, full text vs summary). If <90% pass, adjust tool strategy (e.g., switch from WebFetch to Playwright) before processing remaining batches.
+
 **Spotify DRM blocks audio extraction.** Do not attempt to extract audio from Spotify — Widevine DRM encrypts streams even with a logged-in Playwright session. Use public podcast RSS feeds (Megaphone, Art19, Libsyn) for direct mp3 URLs, or Apple Podcasts via `yt-dlp` as a reliable fallback. RSS feed audio URLs can be stale or remapped — always verify transcription output matches expected content. When in doubt, `yt-dlp` on the Apple Podcasts URL gives the canonical audio URL.
 
 In practice, most transcripts for well-known public figures can be found free online. For the Bezos persona (22 sources):
@@ -137,6 +164,8 @@ Save each source as an individual `.md` file in `sources/[persona-name]/` (the t
 ## Phase 3: Extraction (Per-Source, Parallel)
 
 Launch **one Opus agent per source document**. Each agent reads only its assigned source and produces a structured extraction. All agents can run in parallel.
+
+**For large written corpora (50+ essays/articles):** Don't run one agent per essay — that's 50+ agents for diminishing returns. Instead, **cluster essays thematically** (5-8 essays per cluster) and run one extraction agent per cluster. The agent reads all essays in its cluster and produces a single extraction covering all of them. This is how PG (78 essays → 10 clusters) and Perel (138 essays → 10 clusters) were handled. Interviews still get one agent each (they're longer and more varied).
 
 **Batch in groups of 5** to avoid Opus rate limit hits. As each agent completes, backfill to keep 5 active.
 
@@ -310,7 +339,9 @@ whether to take an entrepreneurial risk.
 
 Launch **one Opus agent per module**, using the taxonomy guide as the blueprint. Each agent reads the taxonomy guide plus ALL extraction files and produces a single situational module.
 
-**Batch in groups of 5** to avoid rate limits. Backfill as each completes to keep 5 active.
+**Batch in groups of 5-8** to avoid rate limits. Backfill as each completes to keep 5-8 active.
+
+**Before launching agents, check for existing module files:** If resuming after context compaction, `ls modules/` to see which modules already exist. Skip existing modules unless a quality pass is explicitly needed. Duplicate agents may improve existing files, but it's wasteful.
 
 ### Module Synthesis Prompt Template
 
@@ -548,12 +579,27 @@ End with: "Check the routing table before every response and load relevant modul
 ## Key Rules
 - **Character-first.** The CLAUDE.md is self-sufficient for basic coaching (6-10K tokens).
   Modules add depth. Don't try to cram all knowledge into the CLAUDE.md.
+- **[PARAPHRASE — VERIFY] audit.** After writing the CLAUDE.md, grep all module files and the
+  CLAUDE.md for `[PARAPHRASE` flags. For each flagged quote, check it against the original source
+  extraction. Fix or remove any that can't be verified. This is a quick pass — don't skip it.
+- **Section-level quality checks (not a word count target).** The CLAUDE.md should be as long as the
+  persona requires — concise personas (like PG) may be ~3,200 words; verbose personas may be 7,000+.
+  Instead of enforcing a word count floor, verify these minimums:
+  - Core Principles: at least 6 entries, each with at least one exact quote
+  - Example Interactions: at least 4 full dialogues of 150+ words each
+  - Anti-patterns ("What You Would NOT Do"): at least 6 entries
+  - Coaching Behaviors: at least 5 named behaviors with descriptions
+  - Signature phrases: at least 10
+  - Routing table: one row per module (must match actual filenames exactly)
+  If any section falls short, expand it before finalizing. Maximum ~7,500 words (10K tokens).
 - **Second person throughout.** "You are...", "You don't..."
 - **Exact quotes only.** Flag uncertain quotes with [PARAPHRASE -- VERIFY].
 - **Anti-patterns are the highest-leverage section.** Get these right.
 - **Example interactions are second-highest leverage.** Show, don't tell.
 - **The routing table instruction must be prominent and mandatory.** Not a footnote.
 - **All 11 coaching elements must be present** (see the 11 Elements list above).
+- **Include the exact module filename list** in the agent prompt (from `ls modules/`).
+  Do NOT let the agent infer filenames from module titles — they will mismatch.
 
 Write output to: [PERSONA_DIR]/CLAUDE.md
 ```
@@ -638,9 +684,18 @@ Claude Code Teams (experimental, behind `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1`
 
 Sub-agents work fine for this pipeline but can't be corrected mid-flight. Recommend Teams for Phase 5 if available; sub-agents are sufficient for Phases 3, 4, and 6.
 
+### Agent Spawning — Opus Only, Agent Tool Only
+
+**ALL sub-agents in this pipeline MUST be Claude Opus, spawned via the Agent tool.** This is non-negotiable.
+
+- **NEVER use the Codex MCP** (`mcp__codex__codex`) to spawn module writers or any pipeline agents. Codex uses GPT, not Opus — different model, different quality, different style. The persona pipeline is designed for and calibrated to Opus output.
+- **NEVER delegate coordination to a sub-agent.** The parent session (or the human) is the coordinator. The parent reads the taxonomy, constructs each sub-agent prompt with the relevant module section pasted in, and spawns agents directly via the Agent tool. No intermediary coordinator agent.
+- **Every sub-agent prompt must include `model: "opus"`** in the Agent tool parameters.
+- If a sub-agent somehow uses Codex or a non-Opus model, stop it immediately, delete its output, and re-run with Opus.
+
 ### Batching and Rate Limits
 
-Batch parallel agents in groups of 5. Opus agents running in parallel hit API ceilings at ~10-15 simultaneous. Backfill as each completes to keep 5 active -- don't wait for the full batch to finish before launching the next group.
+Batch parallel agents in groups of 5-8. In practice, 8 simultaneous Opus agents complete without rate limit issues (tested in PG module synthesis). Backfill as each completes to keep 5-8 active -- don't wait for the full batch to finish before launching the next group.
 
 ### Agent Completion Signals
 
@@ -673,7 +728,9 @@ Notes:
 
 ## Cost Estimates
 
-On **Claude Code Max** (unlimited Opus/Sonnet/Haiku), the only out-of-pocket costs are external API calls:
+On **Claude Code Max** (unlimited Opus/Sonnet/Haiku), the only out-of-pocket costs are external API calls.
+
+**Cost optimization tip:** Subjects with large free written corpora (bloggers, essayists, newsletter writers, shareholder-letter writers) are cheapest to build. PG's 78 free essays (198K words) cost $0 to acquire — total build was $2.38 (5 transcriptions). Compare to interview-dependent subjects like Chris Camillo ($9.89, mostly transcription). When building a persona queue, prioritize essay-dominant subjects first.
 
 | Phase | Cost Driver | Typical Cost |
 |---|---|---|
@@ -691,6 +748,55 @@ On **Claude Code Max** (unlimited Opus/Sonnet/Haiku), the only out-of-pocket cos
 - **Total: ~$2**
 
 If using the Anthropic API directly (not Claude Code Max), expect ~$0.50-1.00 per Opus agent call, making a full persona ~$20-40.
+
+---
+
+## Progress Tracking (Compaction Safety)
+
+The full pipeline takes 60-90 minutes across 7 phases with 30+ agents. Context compaction WILL happen. All progress must live on disk, not in context.
+
+### `build-progress.md` — Required for every persona build
+
+Create `[persona-name]/build-progress.md` at the start of Phase 1. This is the single source of truth for pipeline state. It must contain:
+
+1. **Pipeline status table** — every phase with status (DONE / IN PROGRESS / PENDING) and notes
+2. **Key file paths** — where to find each deliverable (source catalog, manifest, extractions, taxonomy, modules, CLAUDE.md)
+3. **Sources list** — all acquired sources with acquisition method and cost
+4. **Deferred work** — anything explicitly saved for later (e.g., additional sources to transcribe)
+5. **Resume instructions** — step-by-step checklist for picking up from any point:
+   - Read this file
+   - Check which phases have output files on disk
+   - Resume from the earliest incomplete phase
+   - Follow BUILD-PERSONA.md for phase-specific instructions
+
+**Update this file after every sub-agent completes and after every batch.** Not just after phases — after every interaction that changes pipeline state. The coordinator can lose context at any moment (compaction, internet drop, token limit). The progress file must always reflect the current state within one agent's worth of accuracy. The cost of a redundant write is zero; the cost of re-running 30 minutes of Opus work is not.
+
+### Agent Audit Log
+
+The progress file must include an **Agent Audit Log** section that tracks which agent performed each task. For every sub-agent spawned, log:
+
+| Field | What to record |
+|-------|---------------|
+| Task | Module/extraction name |
+| Agent ID | The ID returned by the Agent tool |
+| Model | Must be `opus` for all pipeline work |
+| Tool | Must be `Agent` — never Codex MCP or other tools |
+| Status | running → done/failed |
+
+**At the end of every phase**, the parent coordinator must audit this log:
+1. Every agent ID is logged — no untracked work
+2. Every agent used `model: "opus"` and `tool: Agent`
+3. No Codex MCP or non-Opus models were used (grep agent output files if in doubt)
+4. All expected output files exist on disk
+5. Record audit result as PASS or FAIL with notes
+
+This catches model substitution (like the Codex incident) and ensures full traceability. If an audit fails, stop and remediate before proceeding to the next phase.
+
+### Phase-specific tracking
+
+- **Phase 2:** `sources/[persona-name]/acquisition-manifest.md` — tracks each source's acquisition status, method, cost, and file path. Updated after every source.
+- **Phase 3:** `[persona-name]/synthesis/extraction-progress.md` — tracks which extractions are done, running, or pending. Updated after each batch.
+- **Phases 4-6:** Single-agent phases. Update `build-progress.md` when each completes.
 
 ---
 
