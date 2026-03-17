@@ -1,5 +1,8 @@
 .DS_Store
 temp/
 
+# Source material (copyrighted transcripts) — never committed
+sources/
+
 # All build artifacts and source material live here — never committed
 working-files/
