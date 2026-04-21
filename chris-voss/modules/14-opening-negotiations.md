@@ -65,6 +65,52 @@ The mechanism is involuntary. Voss demonstrated this with a real estate example:
 
 ---
 
+#### The Negotiation One Sheet -- Full Preparation Template [book, Appendix]
+
+The book's Appendix provides the complete, operationalized version of the preparation tool that Voss references in interviews. While the interview version (above) captures the spirit, the book version is a concrete five-section template designed to be filled out on paper before any significant negotiation. It is the single most actionable artifact in the entire book.
+
+**Quote:** "When the pressure is on, you don't rise to the occasion; you fall to your highest level of preparation." [book, Ch. 9]
+
+**Quote:** "Good initial preparation yields at least a 7:1 return on time invested -- time saved renegotiating deals, clarifying implementation, or recovering from preventable mistakes." [book, Appendix]
+
+**The Five Sections:**
+
+**1. The Goal**
+Think through best and worst case outcomes, but only write down the best case. The goal should be optimistic but reasonable -- a clearly defined target, not a vague aspiration. Writing it down commits you psychologically and prevents the gravitational pull of compromise from dragging you toward your worst case during live negotiation. The act of writing is the discipline -- it forces clarity before stress arrives.
+
+**2. Summary**
+Write 2-3 sentences summarizing the known facts that led to this negotiation. This is not your argument or your demands -- it is a neutral summary that the other side would agree is true. The summary is your opening move: you deliver it to produce "That's right" from the counterpart, which establishes trust and rapport before any asks are made. If you can't write something they'd agree is true, you haven't done enough research.
+
+**3. Labels / Accusations Audit**
+Prepare 3-5 labels using the "It seems like..." / "It sounds like..." / "It looks like..." format. These should address the accusations the other side harbors against you -- not accusations you're making of them. Examples: "It seems like you feel we haven't been entirely transparent about timeline." "It sounds like there's a concern that we're not taking your constraints seriously." "It looks like you're reluctant to move forward because of what happened last time." The discipline is front-loading every negative perception so it's defused before it distorts the conversation. "Every single time someone has held back on Accusations Audits they felt were overkill, they got clobbered with exactly what they left out."
+
+**4. Calibrated Questions**
+Prepare 3-5 questions starting with "What" or "How" -- never "Can," "Is," "Are," "Do," or "Does" (closed-ended, low information yield). "Why" is generally dangerous because it sounds accusatory. These questions are designed to reveal value, identify deal killers, and surface implementation requirements. Essential examples from the book [book, Ch. 7]:
+- "What about this is important to you?"
+- "How can I help to make this better for us?"
+- "How would you like me to proceed?"
+- "What is it that brought us into this situation?"
+- "How can we solve this problem?"
+- "How am I supposed to do that?" -- the most powerful calibrated question; says "no" without saying no
+
+Post-agreement implementation questions to include:
+- "How will we know we're on track?"
+- "How will we address things if we find we're off track?"
+
+**5. Non-Cash Items**
+List things they could give you that would be valuable to you but cheap for them, and things you could offer that would be valuable to them but cheap for you. This section transforms zero-sum price haggling into multi-dimensional value creation. The non-cash dimension is where creative deals live -- distribution rights, introductions, timeline flexibility, public endorsement, data access. In the Ackerman Plan, the final non-monetary throw-in comes from this list.
+
+**Why This Tool Matters:**
+The Negotiation One Sheet is the operationalization of Principle P6: "When the pressure is on, you don't rise to the occasion; you fall to your highest level of preparation." Under stress, you will not improvise brilliantly. You will default to whatever you practiced. This template ensures that what you default to is a complete tactical plan -- labels ready, questions loaded, goal clear, and non-cash options mapped.
+
+**Coaching triggers:**
+- User is preparing for any negotiation significant enough to warrant 30 minutes of prep
+- User wants a pre-negotiation checklist or ritual
+- User keeps improvising in negotiations and getting outmaneuvered
+- User is preparing for a salary negotiation, investor meeting, vendor contract, or difficult conversation
+
+---
+
 #### "Is Now a Bad Time to Talk?" [8/16] [SIGNATURE]
 
 **Quote:** "Whenever we call someone, we say, is now a bad time to talk? And you get one or two responses. The person will say, no, no. It's never a bad time to talk. What do you want to talk about? And they're very focused. Or they'll say, yeah, as a matter of fact, it is. But I can talk at 2 o'clock tomorrow." (talks-at-google)

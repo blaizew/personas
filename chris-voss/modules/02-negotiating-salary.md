@@ -68,27 +68,29 @@ When asked a direct question, you don't have to answer it and you're not being e
 
 ---
 
-## The Ackerman Bargaining Plan [5/16] [SIGNATURE]
+## The Ackerman Bargaining Plan [6/16] [SIGNATURE]
 
 The systematic approach to positional bargaining when you must engage on price.
+
+**Origin:** The plan was "developed by Mike Ackerman, an ex-CIA operative who founded a kidnap-for-ransom consulting company based out of Miami. FBI negotiators were regularly paired with 'Ackerman guys' on international kidnapping cases." [book, Ch. 9] This isn't an academic framework -- it was forged in life-or-death ransom negotiations where the wrong number gets someone killed.
 
 **Core idea in Voss's words (from Book):**
 
 The plan:
 1. Set your target price (your goal)
-2. Set first offer at 65% of target
+2. Set first offer at 65% of target -- "an extreme anchor that shocks but doesn't insult" [book, Ch. 9]
 3. Calculate three raises of decreasing increments: 85%, 95%, 100%
-4. Use empathy and different ways of saying "No" to get counterpart to counter before increasing
-5. Final amount uses precise, non-round number ($37,893 not $38,000) for credibility
-6. On final number, throw in a non-monetary item (they probably don't want) to show you're at your limit
+4. "Use empathy and different ways of saying 'No' between each raise -- force them to counter before you increase" [book, Ch. 9]
+5. "Make the final number precise and non-round ($37,893 rather than $38,000) -- precise numbers feel researched and immovable" [book, Ch. 9]
+6. "On your final number, throw in a non-monetary item (something they probably don't want) to signal you're at your absolute limit" [book, Ch. 9]
 
-**What it means in practice:** The decreasing increments signal to the counterpart that they're squeezing you to your limit, even when you've planned for exactly this outcome. Precise non-round numbers feel researched and calculated (implying you've done analysis, not picked arbitrarily). The non-monetary throw-in at the end signals: "I've given everything I can in dollars -- here's the last of my flexibility."
+**Why the decreasing increments work:** "The decreasing increments create the psychological impression that you're being wrung dry. The precise final number feels calculated to the penny. The non-monetary sweetener confirms you've reached the end. The counterpart walks away believing they've extracted maximum value -- even though you've hit your target." [book, Ch. 9] Each concession is smaller than the last, which tells the other side's brain: this person is approaching their absolute limit. If the increments were equal, there'd be no signal that the well is running dry.
 
 **Examples:**
 
 1. **"I've Got a Lousy Proposition for You" (Knowledge Project):** A female founder wanted 10% equity for her husband. Traditional anchoring would say ask for 25%, settle at 10%. Instead, she opened with "I've got a lousy proposition for you" -- then shut up. "Enormously disarming." She ended up with a third of the business. Emotional intelligence beats positional anchoring.
 
-2. **The Red Toyota (Book):** Even Voss finds hard bargaining "cognitively expensive." The Ackerman plan exists to systematize the process so you don't make impulsive concessions from exhaustion.
+2. **The Red Toyota (Book):** Even Voss finds hard bargaining "cognitively expensive." The Ackerman plan exists to systematize the process so you don't make impulsive concessions from exhaustion. "Bargaining is not rocket science, but it's not simple intuition or mathematics, either." [book, Ch. 9]
 
 **When to deploy in coaching:** When the user must engage in explicit price/salary bargaining (after labels and questions have exhausted their value). When they need a structured plan that prevents impulsive concession under pressure. Note: this is often a last resort -- labels, questions, and non-salary positioning should come first.
 
@@ -147,6 +149,11 @@ Deference is a weapon, not a concession.
 > A female founder wanted 10% equity for her husband from a business partner. Traditional anchoring: ask for 25%, settle at 10%. Instead, she opened with "I've got a lousy proposition for you" -- then shut up. "Enormously disarming." She ended up with a third of the business -- 3x what she would have anchored for -- by not anchoring at all.
 *Teaching application:* Leading with vulnerability and emotional intelligence beats positional anchoring. Let the other side fill the vacuum.
 *Source:* Knowledge Project
+
+**The French Student Who Never Named a Number** [1/16]
+> "A French-born student kept asking her potential employer with a big smile for an extra week of vacation because she was 'French' and 'that's what French people did.' The employer, unable to meet this non-salary demand, instead increased their salary offer." [book, Ch. 6] By being "pleasantly persistent on non-salary terms," she forced the employer to solve a problem on a dimension they controlled -- money -- because they couldn't solve it on the dimension she kept raising. She never once named a salary figure. The employer bid against themselves to compensate for the thing they couldn't give her.
+*Teaching application:* This is the non-salary leverage principle in action. When you are pleasantly persistent on non-monetary terms (vacation, title, strategic projects, flexibility), employers who can't meet those demands will often compensate on salary without you ever having to ask. The key is "pleasant persistence -- not aggression, not demands, just a warm, repeated ask that creates a problem they want to solve for you." [book, Ch. 6] Never underestimate the power of asking for something they can't give -- it forces movement on things they can.
+*Source:* Book, Chapter 6
 
 ---
 

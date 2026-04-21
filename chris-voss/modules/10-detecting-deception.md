@@ -25,22 +25,22 @@ The foundational deception-detection principle. Voss's approach rejects the idea
 - User is preparing for a meeting where honesty is critical
 - User asks "how do I know if they're telling the truth?"
 
-#### The Pinocchio Effect / Deception Indicators [5/16]
+#### The Pinocchio Effect / Deception Indicators [6/16]
 
-A set of linguistic tells that emerge when people are being deceptive, drawn from hostage negotiation experience and supported by academic research.
+A set of linguistic tells that emerge when people are being deceptive, drawn from hostage negotiation experience and supported by academic research. Voss names this the "Pinocchio Effect" because "liars use more words, more third-person pronouns, and more complex sentences. They over-explain to sound convincing and distance themselves from the lie. Truth-tellers are direct, simple, and comfortable with brief answers." [book, Ch. 8]
 
 > "Liars use more words than truth-tellers and more third-person pronouns (him, her, it, they). They employ complex sentences to persuade suspicious listeners."
 > -- book
 
 **Practical meaning:** Deception manifests not in what people say but in how they say it. The four key indicators:
 
-1. **More words than necessary.** Truth is simple and direct. Lies require supporting architecture -- qualifications, explanations, justifications. When a simple question produces a paragraph, pay attention.
+1. **More words than necessary.** Truth is simple and direct. Lies require supporting architecture -- qualifications, explanations, justifications. When a simple question produces a paragraph, pay attention. The liar over-explains because they need the fabrication to sound convincing, which paradoxically makes it less convincing to a trained listener.
 
-2. **Third-person pronouns increase.** Liars distance themselves from their own statements. "I did it" becomes "It was done" or "They decided." Heavy use of "we," "they," "them" where "I" would be natural signals distancing.
+2. **Third-person pronouns increase.** "Liars use more third-person pronouns (him, her, it, they, one)" [book, Ch. 8] to distance themselves from their own statements. "I did it" becomes "It was done" or "They decided." Heavy use of "we," "they," "them" where "I" would be natural signals distancing -- the liar is psychologically separating themselves from the lie.
 
-3. **Sentence complexity rises.** Simple truths get stated simply. Complex fabrications require complex sentence structures to maintain internal consistency.
+3. **Sentence complexity rises.** "More complex sentences" [book, Ch. 8] are required to maintain internal consistency of a fabrication. Simple truths get stated simply. When sentence structure becomes elaborate and multi-claused in response to a straightforward question, the person is constructing rather than reporting.
 
-4. **First-person pronoun avoidance.** The inverse of the third-person signal -- when someone can't or won't say "I will do X" with a first-person pronoun, they may be avoiding personal ownership of a commitment.
+4. **First-person pronoun avoidance.** The inverse of the third-person signal -- when someone can't or won't say "I will do X" with a first-person pronoun, they may be avoiding personal ownership of a commitment. This connects to the pronoun-as-power indicator: "Heavy 'I,' 'me,' 'my' usage = the person is less important in the decision chain" while "difficulty accessing first-person pronouns / using 'we,' 'they,' 'the team' = the person holds real decision-making power." [book, Ch. 8] In the deception context, the shift is driven by avoidance of ownership, not authority.
 
 **Coaching triggers:**
 - User notices a counterpart becoming unusually verbose
@@ -88,7 +88,7 @@ He told the team they had time to maneuver. Later, the captors called back with 
 - User needs to assess whether an ultimatum is real
 - User is deciding whether to escalate or wait
 
-#### Three Types of Yes (Commitment, Confirmation, Counterfeit) [4/16]
+#### Three Types of Yes (Commitment, Confirmation, Counterfeit) [5/16]
 
 Most agreements are not what they appear to be. Voss identifies three distinct types of "yes," and the majority of yeses encountered in negotiation are counterfeit.
 
@@ -98,17 +98,21 @@ Most agreements are not what they appear to be. Voss identifies three distinct t
 > "I can give you fake yeses all day long and you're never gonna get what you wanted."
 > -- knowledge-project
 
-The three types:
-1. **Commitment yes** -- genuine intent to follow through. Rare and valuable.
-2. **Confirmation yes** -- acknowledging they heard you. "Yes, I understand" does not mean "yes, I agree."
-3. **Counterfeit yes** -- said to end the conversation, avoid conflict, or extract your terms for comparison shopping. This is the most common type.
+The three types (from Chapter 4 of the book, "Beware 'Yes' -- Master 'No'"):
 
-**Practical meaning:** When you hear "yes," your work is not done -- it's just beginning. Test every yes with "how" questions about implementation. A counterfeit yes collapses under implementation questioning because the person never intended to follow through and cannot describe what execution looks like.
+1. **Counterfeit yes** -- "said to end the conversation, avoid conflict, or extract your terms for comparison shopping." [book, Ch. 4] This is an escape route, not agreement. The person wants out of the conversation and "yes" is the fastest exit. This is the most common type, and the most dangerous because it creates the illusion of progress. The "Daryl" crisis hotline call is the signature example: Voss persuaded an anxious caller that everything was manageable, got a "yes," felt victorious -- then a colleague called it one of the worst calls ever made. The "yes" was hollow because Daryl hadn't been changed, just managed. He agreed to get off the phone.
+
+2. **Confirmation yes** -- a reflexive affirmation with no commitment behind it. "Yes, I understand" does not mean "yes, I agree." "Yes, I hear you" does not mean "yes, I'll act." This is the autopilot response -- acknowledging receipt of words, not endorsing their content.
+
+3. **Commitment yes** -- genuine intent to follow through. Rare and valuable. This is the only "yes" that leads to behavioral change and action. It comes from the counterpart arriving at their own conclusion, not being talked into someone else's. "The goal is behavioral change, not intellectual submission. Let the other person lead themselves to conclusions." [book, Ch. 4]
+
+**Practical meaning:** When you hear "yes," your work is not done -- it's just beginning. Test every yes with "how" questions about implementation. A counterfeit yes collapses under implementation questioning because the person never intended to follow through and cannot describe what execution looks like. This is why Voss says "'No' often opens the discussion up" -- because "No" gives the counterpart safety and control, producing honesty rather than performative agreement. "People need to feel autonomous before they can cooperate." [book, Ch. 4]
 
 **Coaching triggers:**
 - User got a "yes" that felt too easy
 - User suspects agreement is performative
 - User has experienced repeated agreements that never led to action
+- User did all the talking and the other person just agreed
 
 #### Draw Out, Don't Confront [5/16]
 
@@ -149,6 +153,24 @@ The Chase Manhattan bank robbery is the definitive illustration. The robber used
 - User suspects someone is feigning helplessness to avoid commitment
 - User is in a multi-party negotiation and can't tell who has authority
 
+#### The 7-38-55 Rule (Incongruence Detection) [2/16]
+
+A communication research framework that Voss applies directly to deception detection. Based on Albert Mehrabian's research, referenced in Chapter 8 of the book.
+
+> "Superstar negotiators -- real rainmakers -- know that a negotiation is a playing field beneath the words, where really getting to a good deal involves detecting and manipulating subtle, nonobvious signals beneath the surface." [book, Ch. 8]
+
+The distribution: **7% of communication is the words themselves. 38% is tone of voice. 55% is body language and facial expressions.** [book, Ch. 8]
+
+**Practical meaning for deception detection:** When words, tone, and body language are aligned, you're likely hearing truth. When they diverge -- when someone says "yes" but their tone drops, when they agree but their body pulls back, when they promise commitment but their voice tightens -- the nonverbal channels are overriding the verbal one. The 93% of communication that is NOT words will betray a lie that the 7% is trying to sell.
+
+The operational tool: "When tone or body language misaligns with words, use labels to surface the incongruence: 'I heard you say yes, but it seemed like there was some hesitation in your voice.'" [book, Ch. 8] You're not accusing them of lying -- you're noticing the discrepancy and creating space for truth. This is particularly powerful in team settings: "In meetings, this is how you detect hidden disagreement that would otherwise torpedo execution later." [book, Ch. 8]
+
+**Coaching triggers:**
+- User senses something "off" about a conversation but can't name it
+- User reports agreement that doesn't feel genuine
+- User is trying to verify commitment in a meeting or negotiation
+- User needs to distinguish between what someone says and what they actually believe
+
 #### Stories
 
 **Khalid Sheikh Mohammed Identification**
@@ -179,5 +201,5 @@ The Chase Manhattan bank robbery is the definitive illustration. The robber used
 #### Cross-References
 - [Vision Drives Decision] Module 8 -- if they can't describe implementation, they're not genuine
 - [Rule of Three] Module 8 -- triple verification catches counterfeit yeses
-- [7-38-55 Rule] Module 15 -- watch for misalignment between words and tone/body language
+- [7-38-55 Rule] above -- watch for misalignment between words and tone/body language; also covered in Module 15 (Reading People)
 - [Gut vs. Amygdala] Module 19 -- learn to distinguish genuine intuition from fear-based projection
